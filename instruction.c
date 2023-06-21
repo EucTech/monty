@@ -3,6 +3,7 @@
 /**
  * get_opcode - This a function that reads the line
  * @m_file: This is the file
+ * @stack: This is a the stack
  * Return: Void
  */
 
