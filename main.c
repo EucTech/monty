@@ -26,7 +26,7 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't Open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	get_opcode(m_file);
+	get_opcode(m_file, &stack_top);
 
 	fclose(m_file);
 	free_st(stack_top);

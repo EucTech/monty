@@ -43,7 +43,7 @@ typedef struct instruction_s
 
 /**** MY FUNCTIONS PROTOTYPES ****/
 void free_st(stack_t *stack);
-void get_opcode(FILE *m_file);
+void get_opcode(FILE *m_file, stack_t **stack_top);
 void _pall(stack_t **stack, unsigned int line_number);
 void _push(stack_t **stack, unsigned int line_number);
 

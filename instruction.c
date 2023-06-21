@@ -6,14 +6,12 @@
  * Return: Void
  */
 
-void get_opcode(FILE *m_file)
+void get_opcode(FILE *m_file, stack_t **stack)
 {
 	unsigned int line_number = 1;
 	char f_line[100];
 	char *opcode;
 	int lo, opc_valid = 0;
-
-	stack_t *stack_top = NULL;
 
 	instruction_t instruction[] = {
 		{ "push", _push },
@@ -32,14 +30,14 @@ void get_opcode(FILE *m_file)
 				if (strcmp(opcode, instruction[lo].opcode) == 0)
 				{
 					opc_valid = 1;
-					instruction[lo].f(&stack_top, line_number);
+					instruction[lo].f(stack, line_number);
 					break;
 				}
 			}
 			if (opc_valid == 0)
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-				/*free_st(stack_top);*/
+				free_st(*stack);
 				fclose(m_file);
 				exit(EXIT_FAILURE);
 			}
