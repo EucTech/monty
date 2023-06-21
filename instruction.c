@@ -40,7 +40,7 @@ void get_opcode(FILE *m_file)
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 				/*free_st(stack_top);*/
-				/*fclose(m_file);*/
+				fclose(m_file);
 				exit(EXIT_FAILURE);
 			}
 		}

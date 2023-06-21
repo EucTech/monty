@@ -10,7 +10,7 @@
 
 int main(int ac, char **av)
 {
-	
+
 	stack_t *stack_top = NULL;
 	FILE *m_file;
 
