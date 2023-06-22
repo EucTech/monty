@@ -9,6 +9,7 @@
 
 void _push(stack_t **stack, unsigned int line_number)
 {
+	int integer;
 	stack_t *new_node;
 	char *value;
 
@@ -26,7 +27,14 @@ void _push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = atoi(value);
+	integer = atoi(value);
+	if (integer == 0 && strcmp(value, "0") != 0)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	new_node->n = integer;
 	new_node->prev = NULL;
 	new_node->next = *stack;
 
