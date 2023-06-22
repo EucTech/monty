@@ -24,6 +24,7 @@ void get_opcode(stack_t **stack, char *opcode, unsigned int line_number)
 		{ "mul", _mul },
 		{ "div", _div },
 		{ "mod", _mod },
+		{ "pstr", _pstr },
 		{ NULL, NULL }
 	};
 
