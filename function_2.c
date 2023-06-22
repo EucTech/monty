@@ -81,7 +81,7 @@ void _mul(stack_t **stack, unsigned int line_number)
 
 	sec_stack->n *= top_stack->n;
 	sec_stack->prev = NULL;
-	*stack = sec_stack;
 
+	*stack = sec_stack;
 	free(top_stack);
 }
