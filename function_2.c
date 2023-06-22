@@ -27,3 +27,32 @@ void _add(stack_t **stack, unsigned int line_number)
 
 	free(t_stack);
 }
+
+/**
+ * _sub - This ia a function that subtracts top elements
+ * from the second top
+ * @stack: This is a pointer to the stack
+ * @line_number: This is the number of the line
+ * Return: void
+ */
+
+void _sub(stack_t **stack, unsigned int line_number)
+{
+	stack_t *to_stack;
+	stack_t *se_stack;
+
+	if (*stack == NULL || (*stack )->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	to_stack = *stack;
+	se_stack = to_stack->next;
+
+	se_stack->n -= to_stack->n;
+	se_stack->prev = NULL;
+	*stack = se_stack;
+
+	free(to_stack);
+}

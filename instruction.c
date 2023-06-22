@@ -20,6 +20,7 @@ void get_opcode(stack_t **stack, char *opcode, unsigned int line_number)
 		{ "swap", _swap },
 		{ "nop", _nop },
 		{ "add", _add },
+		{ "sub", _sub },
 		{ NULL, NULL }
 	};
 
