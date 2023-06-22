@@ -9,12 +9,11 @@
 
 void _push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node = NULL;
-	stack_t *curr = NULL;
-	char *ag;
+	stack_t *new_node;
+	char *value;
 
-	ag = strtok(NULL, " \t\n");
-	if (ag == NULL)
+	value = strtok(NULL, " \t\n");
+	if (value == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
@@ -27,22 +26,14 @@ void _push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = atoi(ag);
-	new_node->next = NULL;
+	new_node->n = atoi(value);
 	new_node->prev = NULL;
+	new_node->next = *stack;
 
-	if (*stack == NULL)
-	{
-		*stack = new_node;
-		return;
-	}
-	curr = *stack;
-	while (curr->next != NULL)
-	{
-		curr = curr->next;
-	}
-	curr->next = new_node;
-	new_node->prev = curr;
+	if (*stack != NULL)
+		(*stack)->prev = new_node;
+
+	*stack = new_node;
 }
 
 /**
@@ -57,14 +48,42 @@ void _pall(stack_t **stack, unsigned int line_number)
 	stack_t *curt = *stack;
 	(void)line_number;
 
-	while (curt->next != NULL)
-	{
-		curt = curt->next;
-	}
+	if (curt == NULL)
+		return;
 
 	while (curt != NULL)
 	{
 		printf("%d\n", curt->n);
-		curt = curt->prev;
+		curt = curt->next;
+	}
+}
+
+/**
+ * _pop - This is a function that removes from the stack
+ * @stack: This is the stack
+ * @line_number: This is the line
+ * Return: void
+ */
+
+void _pop(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+
+	if (!*stack)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->next != NULL)
+	{
+		*stack = (*stack)->next;
+		free((*stack)->prev);
+		(*stack)->prev = NULL;
+	}
+	else
+	{
+		free(*stack);
+		*stack = NULL;
 	}
 }

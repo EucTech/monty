@@ -2,49 +2,37 @@
 
 /**
  * get_opcode - This a function that reads the line
- * @m_file: This is the file
+ * @opcode: This is the opcode
+ * @line_number: This is the number of lines
  * @stack: This is a the stack
  * Return: Void
  */
 
-void get_opcode(FILE *m_file, stack_t **stack)
+void get_opcode(stack_t **stack, char *opcode, unsigned int line_number)
 {
-	unsigned int line_number = 1;
-	char f_line[100];
-	char *opcode;
 	int lo, opc_valid = 0;
 
 	instruction_t instruction[] = {
 		{ "push", _push },
 		{ "pall", _pall },
+		{ "pop", _pop },
 		{ NULL, NULL }
 	};
 
-	while (fgets(f_line, sizeof(f_line), m_file))
+	for (lo = 0; instruction[lo].opcode != NULL; lo++)
 	{
-		opcode = strtok(f_line, " \t\n");
-
-		if (opcode != NULL)
+		if (strcmp(opcode, instruction[lo].opcode) == 0)
 		{
-			for (lo = 0; instruction[lo].opcode != NULL; lo++)
-			{
-				if (strcmp(opcode, instruction[lo].opcode) == 0)
-				{
-					opc_valid = 1;
-					instruction[lo].f(stack, line_number);
-					break;
-				}
-			}
-			if (opc_valid == 0)
-			{
-				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-				free_st(*stack);
-				fclose(m_file);
-				exit(EXIT_FAILURE);
-			}
+			opc_valid = 1;
+			instruction[lo].f(stack, line_number);
+			break;
 		}
+	}
 
-		line_number++;
+	if (opc_valid == 0)
+	{
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		exit(EXIT_FAILURE);
 	}
 }
 

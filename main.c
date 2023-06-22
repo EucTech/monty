@@ -1,6 +1,5 @@
 #include "monty.h"
 
-
 /**
  * main - This a program for doubly linked list and stack
  * @ac: This is the argument count
@@ -10,11 +9,15 @@
 
 int main(int ac, char **av)
 {
-
 	stack_t *stack_top = NULL;
 	FILE *m_file;
+	size_t n = 0;
+	ssize_t g_line;
+	char *line = NULL;
+	unsigned int line_number = 1;
+	char *opcode;
 
-	if (ac == 1 || ac > 2)
+	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
@@ -26,9 +29,20 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't Open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	get_opcode(m_file, &stack_top);
+
+	while ((g_line = getline(&line, &n, m_file)) != -1)
+	{
+		opcode = strtok(line, "\t\n ");
+		if (opcode != NULL && opcode[0] != '#')
+		{
+			get_opcode(&stack_top, opcode, line_number);
+		}
+		line_number++;
+	}
 
 	fclose(m_file);
+	free(line);
 	free_st(stack_top);
-	exit(EXIT_FAILURE);
+
+	return (EXIT_SUCCESS);
 }
