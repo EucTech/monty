@@ -33,6 +33,11 @@ void _div(stack_t **stack, unsigned int line_number)
 	else
 	{
 		temp = *stack;
+		if (temp->n == 0)
+		{
+			fprintf(stderr, "L%u: division by zero\n", line_number);
+			exit(EXIT_FAILURE);
+		}
 		result = (temp)->next->n / temp->n;
 		*stack = (*stack)->next;
 		(*stack)->prev = NULL;
