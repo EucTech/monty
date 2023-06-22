@@ -105,3 +105,29 @@ void _pint(stack_t **stack, unsigned int line_number)
 	else
 		printf("%d\n", (*stack)->n);
 }
+
+/**
+ * _swap - swaps the top two elements of the stack
+ * @stack: double pointer to the stack
+ * @line_number: the line
+ * Return: void
+ */
+
+void _swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+	int value;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		temp = *stack;
+		value = temp->n;
+		temp->n = temp->next->n;
+		temp->next->n = value;
+	}
+}
