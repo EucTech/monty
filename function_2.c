@@ -85,3 +85,23 @@ void _mul(stack_t **stack, unsigned int line_number)
 	*stack = sec_stack;
 	free(top_stack);
 }
+
+/**
+ * _pstr - This is a function that prints the string starting
+ * at the top of the stack
+ * @stack: This is the stack
+ * @line_number: This is line number
+ * Return: void
+ */
+void _pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
+{
+	stack_t *value = *stack;
+
+	while (value && value->n > 0 && value->n < 128)
+	{
+		printf("%c", value->n);
+		value = value->next;
+	}
+
+	printf("\n");
+}
