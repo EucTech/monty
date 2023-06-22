@@ -41,7 +41,7 @@ void _sub(stack_t **stack, unsigned int line_number)
 	stack_t *to_stack;
 	stack_t *se_stack;
 
-	if (*stack == NULL || (*stack )->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
@@ -55,4 +55,33 @@ void _sub(stack_t **stack, unsigned int line_number)
 	*stack = se_stack;
 
 	free(to_stack);
+}
+
+/**
+ * _mul - This is a function that multiplies the second top element
+ * of the stack with the top
+ * @stack: This is the pointer to the stack
+ * @line_number: This is the the line_number
+ * Return: Nothing
+ */
+
+void _mul(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top_stack;
+	stack_t *sec_stack;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	top_stack = *stack;
+	sec_stack = top_stack->next;
+
+	sec_stack->n *= top_stack->n;
+	sec_stack->prev = NULL;
+	*stack = sec_stack;
+
+	free(top_stack);
 }
