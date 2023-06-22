@@ -25,7 +25,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	int result;
 	stack_t *temp;
 
-	if (*stack == NULL || (*stack)->next == NULL )
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
@@ -56,26 +56,49 @@ void _div(stack_t **stack, unsigned int line_number)
 
 void _mod(stack_t **stack, unsigned int line_number)
 {
-        int result;
-        stack_t *temp;
+	int result;
+	stack_t *temp;
 
-        if (*stack == NULL || (*stack)->next == NULL )
-        {
-                fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
-                exit(EXIT_FAILURE);
-        }
-        else
-        {
-                temp = *stack;
-                if (temp->n == 0)
-                {
-                        fprintf(stderr, "L%u: division by zero\n", line_number);
-                        exit(EXIT_FAILURE);
-                }
-                result = (temp)->next->n % temp->n;
-                *stack = (*stack)->next;
-                (*stack)->prev = NULL;
-                (*stack)->n = result;
-                free(temp);
-        }
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		temp = *stack;
+		if (temp->n == 0)
+		{
+			fprintf(stderr, "L%u: division by zero\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+		result = (temp)->next->n % temp->n;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		(*stack)->n = result;
+		free(temp);
+	}
 }
+
+/**
+ * _pchar - prints the char at the top of the stack, followed by a new line
+ * @stack: double pointer to the stack
+ * @line_number: the line
+ * Return: nothing
+ */
+
+void _pchar(stack_t **stack, unsigned int line_number)
+{
+	if (stack == NULL || *stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->n < 0 || (*stack)->n >= 128)
+	{
+		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%c\n", (*stack)->n);
+}
+
