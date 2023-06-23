@@ -26,9 +26,10 @@ void free_st(stack_t *stack)
  * Return: bool
  */
 
-bool is_digit(const char* value)
+bool is_digit(const char *value)
 {
 	char *endptr;
+
 	strtol(value, &endptr, 10);
 	return (*endptr == '\0');
 }
