@@ -93,9 +93,12 @@ void _mul(stack_t **stack, unsigned int line_number)
  * @line_number: This is line number
  * Return: void
  */
-void _pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void _pstr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *value = *stack;
+	stack_t *value;
+	(void)line_number;
+
+	value = *stack;
 
 	while (value && value->n > 0 && value->n < 128)
 	{
