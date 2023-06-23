@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <fcntl.h>
-
+#include <stdbool.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -62,4 +62,5 @@ void _div(stack_t **stack, unsigned int line_number);
 void _mod(stack_t **stack, unsigned int line_number);
 void _pchar(stack_t **stack, unsigned int line_number);
 void _pstr(stack_t **stack, unsigned int line_number);
+bool is_digit(const char* value);
 #endif

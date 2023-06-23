@@ -18,3 +18,17 @@ void free_st(stack_t *stack)
 		temporal = next;
 	}
 }
+
+
+/**
+ * is_digit - This is a function that convers to an integer
+ * @value: This is the value
+ * Return: bool
+ */
+
+bool is_digit(const char* value)
+{
+	char *endptr;
+	strtol(value, &endptr, 10);
+	return (*endptr == '\0');
+}
