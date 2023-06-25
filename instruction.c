@@ -28,6 +28,8 @@ void get_opcode(stack_t **stack, char *opcode, unsigned int line_number)
 		{ "pstr", _pstr },
 		{ "rotl", _rotl },
 		{ "rotr", _rotr },
+		{ "stack", _stack },
+		{ "queue", _queue },
 		{ NULL, NULL }
 	};
 

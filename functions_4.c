@@ -55,3 +55,31 @@ void _rotr(stack_t **stack, unsigned int line_number)
 	(*stack)->prev = bottom;
 	*stack = bottom;
 }
+
+/**
+ * _stack - sets the format of the data to a stack
+ * @stack: double pointer to the stack
+ * @line_number: the line
+ * Return: nothing
+ */
+
+void _stack(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	input.flag = 0;
+}
+
+/**
+ * _queue - sets the foramt of the data to a queue
+ * @stack: double pointer to the stack
+ * @line_number: the line
+ * Return: nothing
+ */
+
+void _queue(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	input.flag = 1;
+}
