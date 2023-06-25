@@ -26,7 +26,7 @@ int main(int ac, char **av)
 	m_file = fopen(av[1], "r");
 	if (m_file == NULL)
 	{
-		fprintf(stderr, "Error: Can't Open file %s\n", av[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 
